@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: auth-service
+
+  # Configuration Base de données MongoDB
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/auth_db
+      database: auth_db
+
+  # Configuration Email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: zariateya@gmail.com # Remplacez par votre email
+    password: izsnmmlcjpcfdqcj
+    # Remplacez par votre mot de passe d'application
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+# Configuration Serveur
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+# Configuration JWT
+jwt:
+  secret: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7W8kVnTy7zXpnVLGNzFNZQSHCMczWlLQvOGFrKaQGk6ZIz5z0lzZWQXQYu7qN6Uf0Z1mJ9Vz6Z1Zk5Z0Z1Z1Z0Z1Zm5I9Z1Z1Z0Z1Z0ZXQbEoAAEgQzBzBtbmlzdHJhdG9yQGV4YW1wbGUuY29tOmMwbXBhc3NAMTIzNApQc1m6Nnl0ejVRdW5JeE1ESjVOVGd4TURrPQo="
+  expiration: 86400000 # 24 heures en millisecondes
+  refresh-expiration: 604800000 # 7 jours en millisecondes
+
+# Configuration Application
+app:
+  email:
+    from-name: "Université SOA"
+
+# Configuration Logging
+logging:
+  level:
+    com.university.auth_service: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.mail: DEBUG
