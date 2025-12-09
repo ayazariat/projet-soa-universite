@@ -41,6 +41,10 @@ public class SecurityConfig {
 
                 // ✅ Authorization rules
                 .authorizeHttpRequests(auth -> auth
+                        // ✅ STATIC RESOURCES (allow without authentication)
+                        .requestMatchers("/", "/index.html", "/static/**", "/css/**", "/js/**", "/images/**")
+                        .permitAll()
+
                         // ✅ PUBLIC AUTH ENDPOINTS (paths are relative to the servlet context-path)
                         .requestMatchers("/auth/login", "/auth/register", "/auth/health", "/auth/confirm").permitAll()
 

@@ -5,7 +5,7 @@ spring:
   # Configuration Base de données MongoDB
   data:
     mongodb:
-      uri: mongodb://localhost:27017/auth_db
+      uri: mongodb://host.docker.internal:27017/auth_db
       database: auth_db
 
   # Configuration Email
@@ -13,8 +13,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: zariateya@gmail.com # Remplacez par votre email
-    password: izsnmmlcjpcfdqcj
-    # Remplacez par votre mot de passe d'application
+    password: izsnmmlcjpcfdqcj # Mot de passe d'application
     properties:
       mail:
         smtp:
@@ -34,7 +33,7 @@ server:
 
 # Configuration JWT
 jwt:
-  secret: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7W8kVnTy7zXpnVLGNzFNZQSHCMczWlLQvOGFrKaQGk6ZIz5z0lzZWQXQYu7qN6Uf0Z1mJ9Vz6Z1Zk5Z0Z1Z1Z0Z1Zm5I9Z1Z1Z0Z1Z0ZXQbEoAAEgQzBzBtbmlzdHJhdG9yQGV4YW1wbGUuY29tOmMwbXBhc3NAMTIzNApQc1m6Nnl0ejVRdW5JeE1ESjVOVGd4TURrPQo="
+  secret: "dGhpc2lzYWpheWF0c2VjcmV0Zm9yaGp3dGhlcmVpc2Fsb25nc3RyaW5nZm9yaG1hY3NoYTI1NmtleQ"
   expiration: 86400000 # 24 heures en millisecondes
   refresh-expiration: 604800000 # 7 jours en millisecondes
 
