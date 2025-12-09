@@ -1,0 +1,19 @@
+# Ignore common build artifacts and editor/project files
+target
+**/target
+.mvn
+.mvn/**
+*.log
+*.class
+*.jar
+*.war
+*.iml
+*.idea
+.vscode
+.git
+.DS_Store
+node_modules
+tmp
+### Keep pom.xml and source files
+!pom.xml
+!**/pom.xml
