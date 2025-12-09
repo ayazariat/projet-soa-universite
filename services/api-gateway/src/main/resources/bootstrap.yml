@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      enabled: false # Désactivé pour l'instant, peut être activé plus tard
+      import-check:
+        enabled: false

@@ -1,0 +1,5 @@
+com\university\apigateway\filter\JwtAuthenticationFilter.class
+com\university\apigateway\ApiGatewayApplication.class
+com\university\apigateway\config\RouteConfig.class
+com\university\apigateway\util\JwtUtil.class
+com\university\apigateway\config\CorsConfig.class

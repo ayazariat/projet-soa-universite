@@ -23,6 +23,7 @@
 
     <modules>
         <module>services/auth-service/auth-service</module>
+        <module>services/api-gateway</module>
         <!-- Ajoutez d'autres modules ici quand ils seront créés -->
         <!-- <module>services/course-service</module> -->
         <!-- <module>services/student-service</module> -->
@@ -52,4 +53,3 @@
     </build>
 
 </project>
-

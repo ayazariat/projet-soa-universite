@@ -1,0 +1,29 @@
+spring:
+  config:
+    import: optional:configserver:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+# Configuration Serveur
+server:
+  port: 8080
+
+# Configuration JWT
+jwt:
+  secret: "dGhpc2lzYWpheWF0c2VjcmV0Zm9yaGp3dGhlcmVpc2Fsb25nc3RyaW5nZm9yaG1hY3NoYTI1NmtleQ"
+
+# Configuration Application
+app:
+  name: "API Gateway"
+
+# Configuration Logging
+logging:
+  level:
+    com.university.apigateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
