@@ -5,7 +5,7 @@ spring:
   # Configuration Base de données MongoDB
   data:
     mongodb:
-      uri: mongodb://host.docker.internal:27017/auth_db
+      uri: mongodb://localhost:27017/auth_db?authSource=admin
       database: auth_db
 
   # Configuration Email

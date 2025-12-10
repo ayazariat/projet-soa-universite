@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: com.university.apigateway.ApiGatewayApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.870 s <<< FAILURE! -- in com.university.apigateway.ApiGatewayApplicationTests
-com.university.apigateway.ApiGatewayApplicationTests.contextLoads -- Time elapsed: 0.011 s <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@a23a01d testClass = com.university.apigateway.ApiGatewayApplicationTests, locations = [], classes = [com.university.apigateway.ApiGatewayApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@448c8166, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@13526e59, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6cc4cdb9, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@6bb4dd34, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@536dbea0, org.springframework.boot.test.context.SpringBootTestAnnotation@996efd8e], contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.863 s <<< FAILURE! -- in com.university.apigateway.ApiGatewayApplicationTests
+com.university.apigateway.ApiGatewayApplicationTests.contextLoads -- Time elapsed: 0.031 s <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@75201592 testClass = com.university.apigateway.ApiGatewayApplicationTests, locations = [], classes = [com.university.apigateway.ApiGatewayApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@448c8166, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@13526e59, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6cc4cdb9, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@6bb4dd34, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@536dbea0, org.springframework.boot.test.context.SpringBootTestAnnotation@996efd8e], contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
 	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:142)
@@ -22,52 +22,8 @@ java.lang.IllegalStateException: Failed to load ApplicationContext for [Reactive
 	at java.base/java.util.Optional.orElseGet(Optional.java:364)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-Caused by: mapping values are not allowed here
- in 'reader', line 3, column 34:
-        import: optional:configserver:
-                                     ^
-
-	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchValue(ScannerImpl.java:902)
-	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchMoreTokens(ScannerImpl.java:391)
-	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:238)
-	at org.yaml.snakeyaml.parser.ParserImpl$ParseBlockMappingKey.produce(ParserImpl.java:637)
-	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:161)
-	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57)
-	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43)
-	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136)
-	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116)
-	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:241)
-	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:205)
-	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323)
-	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209)
-	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323)
-	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209)
-	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:369)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:348)
-	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:323)
-	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:209)
-	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:131)
-	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:162)
-	at org.springframework.boot.env.OriginTrackedYamlLoader$OriginTrackingConstructor.getData(OriginTrackedYamlLoader.java:99)
-	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:515)
-	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:203)
-	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:169)
-	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:84)
-	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50)
-	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:54)
-	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:36)
-	at org.springframework.boot.context.config.ConfigDataLoaders.load(ConfigDataLoaders.java:96)
-	at org.springframework.boot.context.config.ConfigDataImporter.load(ConfigDataImporter.java:132)
-	at org.springframework.boot.context.config.ConfigDataImporter.resolveAndLoad(ConfigDataImporter.java:87)
-	at org.springframework.boot.context.config.ConfigDataEnvironmentContributors.withProcessedImports(ConfigDataEnvironmentContributors.java:121)
-	at org.springframework.boot.context.config.ConfigDataEnvironment.processInitial(ConfigDataEnvironment.java:245)
-	at org.springframework.boot.context.config.ConfigDataEnvironment.processAndApply(ConfigDataEnvironment.java:232)
-	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:96)
-	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:89)
+Caused by: org.springframework.cloud.commons.ConfigDataMissingEnvironmentPostProcessor$ImportException: No spring.config.import set
+	at org.springframework.cloud.commons.ConfigDataMissingEnvironmentPostProcessor.postProcessEnvironment(ConfigDataMissingEnvironmentPostProcessor.java:82)
 	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:109)
 	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:94)
 	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)

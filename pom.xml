@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -24,8 +24,9 @@
     <modules>
         <module>services/auth-service/auth-service</module>
         <module>services/api-gateway</module>
-        <!-- Ajoutez d'autres modules ici quand ils seront créés -->
+        <!-- Course service is SOAP Java, not included in Maven build -->
         <!-- <module>services/course-service</module> -->
+        <!-- Student service is Node.js, not included in Maven build -->
         <!-- <module>services/student-service</module> -->
     </modules>
 

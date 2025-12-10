@@ -5,7 +5,10 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { CoursesPage } from './pages/CoursesPage';
+import { StudentsPage } from './pages/StudentsPage';
 import { DashboardLayout } from './components/layout/DashboardLayout';
+import { Toaster } from './components/ui/toaster';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,13 +41,14 @@ function App() {
           >
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="courses" element={<div className="text-2xl font-bold">Courses Page (Coming Soon)</div>} />
-            <Route path="students" element={<div className="text-2xl font-bold">Students Page (Coming Soon)</div>} />
+            <Route path="courses" element={<CoursesPage />} />
+            <Route path="students" element={<StudentsPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="profile" element={<div className="text-2xl font-bold">Profile Page (Coming Soon)</div>} />
           </Route>
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </QueryClientProvider>
   );

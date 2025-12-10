@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: university-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: university_db
+    volumes:
+      - mongodb_data:/data/db
+      - ./docker/mongodb/init:/docker-entrypoint-initdb.d
+    networks:
+      - university-network
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./services/auth-service/auth-service
+      dockerfile: Dockerfile
+    container_name: university-auth-service
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATA_MONGODB_URI: mongodb://admin:password@mongodb:27017/auth_db?authSource=admin
+      JWT_SECRET: dGhpc2lzYWpheWF0c2VjcmV0Zm9yaGp3dGhlcmVpc2Fsb25nc3RyaW5nZm9yaG1hY3NoYTI1NmtleQ
+    depends_on:
+      - mongodb
+    networks:
+      - university-network
+
+  # Course Service (SOAP)
+  course-service:
+    build:
+      context: ./services/course-service
+      dockerfile: Dockerfile
+    container_name: university-course-service
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    networks:
+      - university-network
+
+  # Student Service (Node.js)
+  student-service:
+    build:
+      context: ./services/student-service
+      dockerfile: dockerfile
+    container_name: university-student-service
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: mongodb://admin:password@mongodb:27017/student_db?authSource=admin
+      PORT: 3000
+    depends_on:
+      - mongodb
+    networks:
+      - university-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: university-api-gateway
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_CLOUD_CONFIG_ENABLED: false
+      JWT_SECRET: dGhpc2lzYWpheWF0c2VjcmV0Zm9yaGp3dGhlcmVpc2Fsb25nc3RyaW5nZm9yaG1hY3NoYTI1NmtleQ
+    depends_on:
+      - auth-service
+      - course-service
+      - student-service
+    networks:
+      - university-network
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: university-frontend
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - university-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  university-network:
+    driver: bridge

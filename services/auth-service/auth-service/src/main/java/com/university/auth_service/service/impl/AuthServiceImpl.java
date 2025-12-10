@@ -78,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setRole(request.getRole());
-        user.setEnabled(false); // désactivé jusqu'à confirmation
+        user.setEnabled(true); // activé par défaut pour faciliter les tests
         user.setCreatedAt(LocalDateTime.now());
 
         User savedUser = userRepository.save(user);

@@ -5,7 +5,8 @@ FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
 WORKDIR /workspace
 
-# Copier uniquement le pom.xml pour le cache Maven
+# Copier le pom.xml parent et le pom.xml du module
+COPY ../../../pom.xml .
 COPY pom.xml .
 
 RUN mvn -B dependency:go-offline

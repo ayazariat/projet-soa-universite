@@ -1,4 +1,4 @@
-import type { LoginRequest, RegisterRequest, AuthResponse, UserDTO, UpdatePasswordRequest, ErrorResponse } from './types';
+import type { LoginRequest, RegisterRequest, AuthResponse, UserDTO, UpdatePasswordRequest, ErrorResponse, Student, CreateStudentRequest, UpdateStudentRequest, Course, CreateCourseRequest, UpdateCourseRequest } from './types';
 
 const API_BASE = '/api';
 
@@ -85,6 +85,64 @@ class ApiClient {
     return this.request<string>('/auth/update-password', {
       method: 'POST',
       body: JSON.stringify(data),
+    });
+  }
+
+  // Students endpoints
+  async getStudents(): Promise<Student[]> {
+    return this.request<Student[]>('/students');
+  }
+
+  async getStudent(id: string): Promise<Student> {
+    return this.request<Student>(`/students/${id}`);
+  }
+
+  async createStudent(data: CreateStudentRequest): Promise<Student> {
+    return this.request<Student>('/students', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateStudent(id: string, data: UpdateStudentRequest): Promise<Student> {
+    return this.request<Student>(`/students/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteStudent(id: string): Promise<void> {
+    return this.request<void>(`/students/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Courses endpoints
+  async getCourses(): Promise<Course[]> {
+    return this.request<Course[]>('/courses');
+  }
+
+  async getCourse(id: string): Promise<Course> {
+    return this.request<Course>(`/courses/${id}`);
+  }
+
+  async createCourse(data: CreateCourseRequest): Promise<Course> {
+    return this.request<Course>('/courses', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateCourse(id: string, data: UpdateCourseRequest): Promise<Course> {
+    return this.request<Course>(`/courses/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteCourse(id: string): Promise<void> {
+    return this.request<void>(`/courses/${id}`, {
+      method: 'DELETE',
     });
   }
 }

@@ -43,3 +43,60 @@ export interface ErrorResponse {
   message: string;
   path: string | null;
 }
+
+// Student types
+export interface Student {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  studentId: string;
+  dateOfBirth?: string;
+  enrollmentDate: string;
+  major?: string;
+  gpa?: number;
+  status: 'ACTIVE' | 'INACTIVE' | 'GRADUATED';
+}
+
+export interface CreateStudentRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  studentId: string;
+  dateOfBirth?: string;
+  major?: string;
+}
+
+export interface UpdateStudentRequest extends Partial<CreateStudentRequest> {
+  status?: Student['status'];
+}
+
+// Course types
+export interface Course {
+  id: string;
+  code: string;
+  name: string;
+  description?: string;
+  credits: number;
+  instructor?: string;
+  schedule?: string;
+  capacity: number;
+  enrolled: number;
+  semester: string;
+  status: 'ACTIVE' | 'CANCELLED' | 'COMPLETED';
+}
+
+export interface CreateCourseRequest {
+  code: string;
+  name: string;
+  description?: string;
+  credits: number;
+  instructor?: string;
+  schedule?: string;
+  capacity: number;
+  semester: string;
+}
+
+export interface UpdateCourseRequest extends Partial<CreateCourseRequest> {
+  status?: Course['status'];
+}
