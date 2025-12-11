@@ -21,11 +21,13 @@ export function StudentsPage() {
 
   const { data: students = [], isLoading } = useQuery({
     queryKey: ['students'],
-    queryFn: apiClient.getStudents,
+    queryFn: () => apiClient.getStudents(),
   });
 
   const createMutation = useMutation({
-    mutationFn: apiClient.createStudent,
+    mutationFn: (data: CreateStudentRequest) => {
+      return apiClient.createStudent(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['students'] });
       setIsCreateDialogOpen(false);
@@ -44,8 +46,9 @@ export function StudentsPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: UpdateStudentRequest }) =>
-      apiClient.updateStudent(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdateStudentRequest }) => {
+      return apiClient.updateStudent(id, data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['students'] });
       setEditingStudent(null);
@@ -64,7 +67,9 @@ export function StudentsPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: apiClient.deleteStudent,
+    mutationFn: (id: string) => {
+      return apiClient.deleteStudent(id);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['students'] });
       toast({

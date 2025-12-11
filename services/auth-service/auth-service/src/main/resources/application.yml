@@ -5,7 +5,7 @@ spring:
   # Configuration Base de données MongoDB
   data:
     mongodb:
-      uri: mongodb://localhost:27017/auth_db?authSource=admin
+      uri: ${SPRING_DATA_MONGODB_URI}
       database: auth_db
 
   # Configuration Email

@@ -3,6 +3,8 @@ package com.university.apigateway.controller;
 import com.university.apigateway.model.Course;
 import com.university.apigateway.model.CourseResponse;
 import com.university.apigateway.model.Cours;
+import com.university.apigateway.model.CreateCourseRequest;
+import com.university.apigateway.model.UpdateCourseRequest;
 import com.university.apigateway.service.CourseServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,19 +53,30 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addCourse(@RequestBody CourseResponse courseRequest) {
+    public ResponseEntity<String> addCourse(@RequestBody CreateCourseRequest courseRequest) {
         // For now, just return success since SOAP integration is pending
         // TODO: Implement actual course creation via SOAP service
         return ResponseEntity.ok("Course added successfully");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCourse(@PathVariable String id, @RequestBody UpdateCourseRequest course) {
+        // For now, just return success since SOAP integration is pending
+        // TODO: Implement actual course update via SOAP service
+        return ResponseEntity.ok("Course updated successfully");
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCourse(@PathVariable int id) {
-        boolean success = courseServiceClient.deleteCourse(id);
-        if (success) {
-            return ResponseEntity.ok("Course deleted successfully");
-        } else {
-            return ResponseEntity.badRequest().body("Failed to delete course");
+    public ResponseEntity<String> deleteCourse(@PathVariable String id) {
+        try {
+            boolean success = courseServiceClient.deleteCourse(Integer.parseInt(id));
+            if (success) {
+                return ResponseEntity.ok("Course deleted successfully");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error deleting course: " + e.getMessage());
         }
     }
 

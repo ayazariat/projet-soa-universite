@@ -22,11 +22,13 @@ export function CoursesPage() {
 
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ['courses'],
-    queryFn: apiClient.getCourses,
+    queryFn: () => apiClient.getCourses(),
   });
 
   const createMutation = useMutation({
-    mutationFn: apiClient.createCourse,
+    mutationFn: (data: CreateCourseRequest) => {
+      return apiClient.createCourse(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       setIsCreateDialogOpen(false);
@@ -45,8 +47,9 @@ export function CoursesPage() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: UpdateCourseRequest }) =>
-      apiClient.updateCourse(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdateCourseRequest }) => {
+      return apiClient.updateCourse(id, data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       setEditingCourse(null);
@@ -65,7 +68,9 @@ export function CoursesPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: apiClient.deleteCourse,
+    mutationFn: (id: string) => {
+      return apiClient.deleteCourse(id);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       toast({

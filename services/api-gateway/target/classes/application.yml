@@ -1,6 +1,8 @@
 spring:
   application:
     name: apigateway
+  main:
+    web-application-type: reactive
 
   cloud:
     gateway:
@@ -9,10 +11,6 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/api/auth/**
-        - id: student-service
-          uri: http://localhost:3000
-          predicates:
-            - Path=/api/students/**
 
 server:
   port: 8080

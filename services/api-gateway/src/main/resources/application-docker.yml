@@ -9,10 +9,6 @@ spring:
           uri: http://auth-service:8081
           predicates:
             - Path=/api/auth/**
-        - id: student-service
-          uri: http://student-service:3000
-          predicates:
-            - Path=/api/students/**
 
 server:
   port: 8080

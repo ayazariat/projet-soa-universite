@@ -1,7 +1,10 @@
 com\university\apigateway\controller\CourseController.class
 com\university\apigateway\model\Cours.class
-com\university\apigateway\filter\JwtAuthenticationFilter.class
+com\university\apigateway\model\Student.class
+com\university\apigateway\controller\StudentController.class
 com\university\apigateway\model\Course.class
+com\university\apigateway\config\RestTemplateConfig.class
+com\university\apigateway\filter\JwtAuthenticationFilter.class
 com\university\apigateway\ApiGatewayApplication.class
 com\university\apigateway\util\JwtUtil.class
 com\university\apigateway\config\CorsConfig.class

@@ -74,23 +74,28 @@ export interface UpdateStudentRequest extends Partial<CreateStudentRequest> {}
 
 // Course types
 export interface Course {
-  idCours: number;
-  nomCours: string;
-  salle: string;
-  professeur: string;
-  jour: string;
-  heureDebut: string;
-  heureFin: string;
+  id: string;
+  code: string;
+  name: string;
+  description?: string;
+  credits: number;
+  instructor?: string;
+  schedule?: string;
+  capacity: number;
+  enrolled: number;
+  semester: string;
+  status: string;
 }
 
 export interface CreateCourseRequest {
-  idCours: number;
-  nomCours: string;
-  salle: string;
-  professeur: string;
-  jour: string;
-  heureDebut: string;
-  heureFin: string;
+  code: string;
+  name: string;
+  description?: string;
+  credits: number;
+  instructor?: string;
+  schedule?: string;
+  capacity: number;
+  semester: string;
 }
 
 export interface UpdateCourseRequest extends Partial<CreateCourseRequest> {}
