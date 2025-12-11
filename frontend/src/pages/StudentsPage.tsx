@@ -149,28 +149,24 @@ export function StudentsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Student ID</TableHead>
+                  <TableHead>CIN</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
-                  <TableHead>Major</TableHead>
-                  <TableHead>GPA</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>Phone</TableHead>
+                  <TableHead>Level</TableHead>
+                  <TableHead>Gender</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {students.map((student) => (
-                  <TableRow key={student.id}>
-                    <TableCell className="font-medium">{student.studentId}</TableCell>
-                    <TableCell>{student.firstName} {student.lastName}</TableCell>
+                  <TableRow key={student._id || student.cin}>
+                    <TableCell className="font-medium">{student.cin}</TableCell>
+                    <TableCell>{student.prenom} {student.nom}</TableCell>
                     <TableCell>{student.email}</TableCell>
-                    <TableCell>{student.major || 'Not specified'}</TableCell>
-                    <TableCell>{student.gpa || 'N/A'}</TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusBadgeVariant(student.status)}>
-                        {student.status}
-                      </Badge>
-                    </TableCell>
+                    <TableCell>{student.telephone}</TableCell>
+                    <TableCell>{student.niveau}</TableCell>
+                    <TableCell>{student.genre}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
                         <Button
@@ -185,7 +181,7 @@ export function StudentsPage() {
                           size="sm"
                           onClick={() => {
                             if (confirm('Are you sure you want to delete this student?')) {
-                              deleteMutation.mutate(student.id);
+                              deleteMutation.mutate(student._id || student.cin);
                             }
                           }}
                         >
@@ -213,7 +209,7 @@ export function StudentsPage() {
           {editingStudent && (
             <StudentForm
               initialData={editingStudent}
-              onSubmit={(data) => updateMutation.mutate({ id: editingStudent.id, data })}
+              onSubmit={(data) => updateMutation.mutate({ id: editingStudent._id || editingStudent.cin, data })}
               isLoading={updateMutation.isPending}
             />
           )}
@@ -231,12 +227,14 @@ interface StudentFormProps {
 
 function StudentForm({ initialData, onSubmit, isLoading }: StudentFormProps) {
   const [formData, setFormData] = useState<CreateStudentRequest>({
-    firstName: initialData?.firstName || '',
-    lastName: initialData?.lastName || '',
+    nom: initialData?.nom || '',
+    prenom: initialData?.prenom || '',
+    cin: initialData?.cin || '',
     email: initialData?.email || '',
-    studentId: initialData?.studentId || '',
-    dateOfBirth: initialData?.dateOfBirth || '',
-    major: initialData?.major || '',
+    telephone: initialData?.telephone || '',
+    niveau: initialData?.niveau || '',
+    genre: initialData?.genre || 'Masculin',
+    dateDeNaissance: initialData?.dateDeNaissance || '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -248,20 +246,20 @@ function StudentForm({ initialData, onSubmit, isLoading }: StudentFormProps) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="firstName">First Name</Label>
+          <Label htmlFor="prenom">First Name</Label>
           <Input
-            id="firstName"
-            value={formData.firstName}
-            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            id="prenom"
+            value={formData.prenom}
+            onChange={(e) => setFormData({ ...formData, prenom: e.target.value })}
             required
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="lastName">Last Name</Label>
+          <Label htmlFor="nom">Last Name</Label>
           <Input
-            id="lastName"
-            value={formData.lastName}
-            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+            id="nom"
+            value={formData.nom}
+            onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
             required
           />
         </div>
@@ -279,11 +277,11 @@ function StudentForm({ initialData, onSubmit, isLoading }: StudentFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="studentId">Student ID</Label>
+          <Label htmlFor="cin">CIN</Label>
           <Input
-            id="studentId"
-            value={formData.studentId}
-            onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
+            id="cin"
+            value={formData.cin}
+            onChange={(e) => setFormData({ ...formData, cin: e.target.value })}
             required
           />
         </div>
@@ -291,22 +289,50 @@ function StudentForm({ initialData, onSubmit, isLoading }: StudentFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="dateOfBirth">Date of Birth</Label>
+          <Label htmlFor="telephone">Phone</Label>
           <Input
-            id="dateOfBirth"
-            type="date"
-            value={formData.dateOfBirth}
-            onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+            id="telephone"
+            value={formData.telephone}
+            onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}
+            required
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="major">Major</Label>
+          <Label htmlFor="niveau">Level</Label>
           <Input
-            id="major"
-            value={formData.major}
-            onChange={(e) => setFormData({ ...formData, major: e.target.value })}
-            placeholder="e.g., Computer Science"
+            id="niveau"
+            value={formData.niveau}
+            onChange={(e) => setFormData({ ...formData, niveau: e.target.value })}
+            required
           />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="dateDeNaissance">Date of Birth</Label>
+          <Input
+            id="dateDeNaissance"
+            type="date"
+            value={formData.dateDeNaissance}
+            onChange={(e) => setFormData({ ...formData, dateDeNaissance: e.target.value })}
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="genre">Gender</Label>
+          <Select
+            value={formData.genre}
+            onValueChange={(value: 'Masculin' | 'Féminin') => setFormData({ ...formData, genre: value })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Masculin">Masculin</SelectItem>
+              <SelectItem value="Féminin">Féminin</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

@@ -46,57 +46,51 @@ export interface ErrorResponse {
 
 // Student types
 export interface Student {
-  id: string;
-  firstName: string;
-  lastName: string;
+  _id?: string;
+  nom: string;
+  prenom: string;
+  cin: string;
   email: string;
-  studentId: string;
-  dateOfBirth?: string;
-  enrollmentDate: string;
-  major?: string;
-  gpa?: number;
-  status: 'ACTIVE' | 'INACTIVE' | 'GRADUATED';
+  telephone: string;
+  niveau: string;
+  genre: 'Masculin' | 'Féminin';
+  dateDeNaissance: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateStudentRequest {
-  firstName: string;
-  lastName: string;
+  nom: string;
+  prenom: string;
+  cin: string;
   email: string;
-  studentId: string;
-  dateOfBirth?: string;
-  major?: string;
+  telephone: string;
+  niveau: string;
+  genre: 'Masculin' | 'Féminin';
+  dateDeNaissance: string;
 }
 
-export interface UpdateStudentRequest extends Partial<CreateStudentRequest> {
-  status?: Student['status'];
-}
+export interface UpdateStudentRequest extends Partial<CreateStudentRequest> {}
 
 // Course types
 export interface Course {
-  id: string;
-  code: string;
-  name: string;
-  description?: string;
-  credits: number;
-  instructor?: string;
-  schedule?: string;
-  capacity: number;
-  enrolled: number;
-  semester: string;
-  status: 'ACTIVE' | 'CANCELLED' | 'COMPLETED';
+  idCours: number;
+  nomCours: string;
+  salle: string;
+  professeur: string;
+  jour: string;
+  heureDebut: string;
+  heureFin: string;
 }
 
 export interface CreateCourseRequest {
-  code: string;
-  name: string;
-  description?: string;
-  credits: number;
-  instructor?: string;
-  schedule?: string;
-  capacity: number;
-  semester: string;
+  idCours: number;
+  nomCours: string;
+  salle: string;
+  professeur: string;
+  jour: string;
+  heureDebut: string;
+  heureFin: string;
 }
 
-export interface UpdateCourseRequest extends Partial<CreateCourseRequest> {
-  status?: Course['status'];
-}
+export interface UpdateCourseRequest extends Partial<CreateCourseRequest> {}

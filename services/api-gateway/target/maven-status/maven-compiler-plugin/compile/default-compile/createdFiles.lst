@@ -1,5 +1,9 @@
+com\university\apigateway\controller\CourseController.class
+com\university\apigateway\model\Cours.class
 com\university\apigateway\filter\JwtAuthenticationFilter.class
+com\university\apigateway\model\Course.class
 com\university\apigateway\ApiGatewayApplication.class
-com\university\apigateway\config\RouteConfig.class
 com\university\apigateway\util\JwtUtil.class
 com\university\apigateway\config\CorsConfig.class
+com\university\apigateway\model\CourseResponse.class
+com\university\apigateway\service\CourseServiceClient.class

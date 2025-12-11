@@ -1,5 +1,9 @@
-C:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\ApiGatewayApplication.java
-C:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\config\CorsConfig.java
-C:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\config\RouteConfig.java
-C:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\filter\JwtAuthenticationFilter.java
-C:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\util\JwtUtil.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\config\CorsConfig.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\filter\JwtAuthenticationFilter.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\controller\CourseController.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\service\CourseServiceClient.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\model\Course.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\model\CourseResponse.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\ApiGatewayApplication.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\model\Cours.java
+c:\Users\LENOVO\Desktop\projet-soa-universite\services\api-gateway\src\main\java\com\university\apigateway\util\JwtUtil.java

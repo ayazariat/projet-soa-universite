@@ -14,6 +14,7 @@ import com.university.auth_service.security.JwtTokenProvider;
 import com.university.auth_service.service.AuthService;
 import com.university.auth_service.service.EmailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
@@ -61,15 +63,19 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDTO register(RegisterRequest request) {
+        log.info("Starting user registration for username: {}", request.getUsername());
 
         if (userRepository.existsByUsername(request.getUsername())) {
+            log.warn("Username already exists: {}", request.getUsername());
             throw new AuthException("Nom d'utilisateur déjà utilisé");
         }
 
         if (userRepository.existsByEmail(request.getEmail())) {
+            log.warn("Email already exists: {}", request.getEmail());
             throw new AuthException("Email déjà utilisé");
         }
 
+        log.debug("Creating new user entity");
         // Créer un utilisateur désactivé
         User user = new User();
         user.setUsername(request.getUsername());
@@ -81,21 +87,29 @@ public class AuthServiceImpl implements AuthService {
         user.setEnabled(true); // activé par défaut pour faciliter les tests
         user.setCreatedAt(LocalDateTime.now());
 
+        log.debug("Saving user to database");
         User savedUser = userRepository.save(user);
+        log.info("User saved with ID: {}", savedUser.getId());
 
         // Générer un token d'activation
         String token = UUID.randomUUID().toString();
+        log.debug("Generated verification token: {}", token);
         VerificationToken verificationToken = new VerificationToken(token, savedUser.getId());
         verificationTokenRepository.save(verificationToken);
+        log.info("Verification token saved");
 
         // Envoyer le lien de confirmation
         try {
+            log.debug("Sending activation email to: {}", savedUser.getEmail());
             emailService.sendActivationEmail(savedUser.getEmail(), savedUser.getFirstName(), token);
+            log.info("Activation email sent successfully");
         } catch (Exception e) {
+            log.error("Failed to send activation email", e);
             // Loger l'erreur sans bloquer l'inscription
             e.printStackTrace();
         }
 
+        log.info("Registration completed successfully for user: {}", savedUser.getUsername());
         return convertToDTO(savedUser);
     }
 
